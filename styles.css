@@ -22,6 +22,7 @@ body {
     background-color: var(--page-background);  /* Dimmer background */
     color: var(--text);
     line-height: 1.6;
+    padding-top: 80px; /* Adjust this value to match your nav height */
 }
 
 body.index-page::before {
@@ -46,6 +47,16 @@ body.index-page::before {
     border-radius: 15px;
     position: relative;
     overflow: hidden;
+}
+
+nav.neumorphic {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--background);
+    border-radius: 0 0 15px 15px; /* Only round bottom corners since it's at top */
 }
 
 .neumorphic::after {
@@ -898,7 +909,7 @@ footer {
 
 /* Pricing Page Styles */
 .pricing-page {
-    padding-top: 80px;
+    padding-top: 100px;
 }
 
 .pricing-section {
@@ -924,6 +935,7 @@ footer {
 .pricing-card {
     padding: 2rem;
     position: relative;
+    z-index: 999;
     transition: transform 0.3s ease;
 }
 
@@ -936,6 +948,18 @@ footer {
     border: 2px solid var(--accent);
 }
 
+
+.pricing-card.neumorphic {
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.3s ease;
+    margin-top: 12px; /* Add space for the tag */
+    background: var(--background);
+    box-shadow: 6px 6px 12px var(--shadow-dark),
+                -6px -6px 12px var(--shadow-light);
+}
+
+
 .popular-tag {
     position: absolute;
     top: -12px;
@@ -947,6 +971,8 @@ footer {
     border-radius: 15px;
     font-size: 0.8rem;
     font-weight: 600;
+    white-space: nowrap; /* Prevent text wrapping */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .pricing-header {
@@ -1257,4 +1283,13 @@ footer {
     opacity: 1;
     color: #dc3545;
     transform: scale(1.1);
+}
+
+.sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--background-color);
 }
