@@ -30,55 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 
-    // Form submission animation
-    const form = document.querySelector('.contact-form');
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const button = this.querySelector('.submit-button');
-        const formData = new FormData(this);
-
-        try {
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            button.disabled = true;
-
-            // Update the URL to point to your Firebase Cloud Function
-            const response = await fetch('https://learnenplay-47bff.cloudfunctions.net/sendContactForm', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    message: formData.get('message')
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to send message');
-            }
-
-            // Success animation
-            button.innerHTML = '<i class="fas fa-check"></i> Sent!';
-            button.style.background = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
-            form.reset();
-
-        } catch (error) {
-            // Error handling
-            button.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to send';
-            button.style.background = '#dc3545';
-            console.error('Error:', error);
-
-        } finally {
-            // Reset button after 3 seconds
-            setTimeout(() => {
-                button.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                button.style.background = '';
-                button.disabled = false;
-            }, 3000);
-        }
-    });
-
     // Shape generation and collision
     const shapes = [];
     const NUM_SHAPES = 20;
