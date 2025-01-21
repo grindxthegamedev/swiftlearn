@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             button.disabled = true;
 
-            // Send the form data to your backend
-            const response = await fetch('/api/contact', {
+            // Update the URL to point to your Firebase Cloud Function
+            const response = await fetch('https://learnenplay-47bff.cloudfunctions.net/sendContactForm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
