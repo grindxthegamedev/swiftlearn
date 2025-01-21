@@ -32,16 +32,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Form submission animation
     const form = document.querySelector('.contact-form');
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         const button = this.querySelector('.submit-button');
-        button.innerHTML = '<i class="fas fa-check"></i> Sent!';
-        button.style.background = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
-        setTimeout(() => {
-            button.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-            button.style.background = '';
+        const formData = new FormData(this);
+
+        try {
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            button.disabled = true;
+
+            // Send the form data to your backend
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    message: formData.get('message')
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to send message');
+            }
+
+            // Success animation
+            button.innerHTML = '<i class="fas fa-check"></i> Sent!';
+            button.style.background = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
             form.reset();
-        }, 3000);
+
+        } catch (error) {
+            // Error handling
+            button.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to send';
+            button.style.background = '#dc3545';
+            console.error('Error:', error);
+
+        } finally {
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                button.style.background = '';
+                button.disabled = false;
+            }, 3000);
+        }
     });
 
     // Shape generation and collision
