@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftLearn - My Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body class="accounts-page">
+    <div class="accounts-decoration">
+        <div class="accounts-dots"></div>
+        <div class="decoration-line"></div>
+        <div class="decoration-line"></div>
+    </div>
+
+    <nav class="neumorphic">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.8rem;">
+                <img src="logo.png" alt="SwiftLearn Logo" class="logo-img">
+                <span>SwiftLearn</span>
+            </a>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Our Approach</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main class="profile-page">
+        <div class="profile-container neumorphic">
+            <div class="profile-header">
+                <i class="fas fa-user-circle profile-avatar"></i>
+                <h2>Welcome!</h2>
+            </div>
+
+            <div class="profile-info">
+                <div class="info-group">
+                    <label>Full Name</label>
+                    <p id="userName">Not set</p>
+                </div>
+
+                <div class="info-group">
+                    <label>Email</label>
+                    <p id="userEmail">Loading...</p>
+                </div>
+                
+                <div class="info-group membership-status">
+                    <label>Membership</label>
+                    <p id="membershipStatus">
+                        <span class="status-badge">No Active Subscription</span>
+                    </p>
+                </div>
+
+                <div class="info-group">
+                    <label>Member Since</label>
+                    <p id="memberSince">Loading...</p>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="action-button neumorphic" id="updateProfileBtn">
+                    <i class="fas fa-user-edit"></i>
+                    Update Profile
+                </button>
+                <button class="action-button neumorphic" id="changePasswordBtn">
+                    <i class="fas fa-key"></i>
+                    Change Password
+                </button>
+            </div>
+
+            <div class="upcoming-sessions neumorphic">
+                <div class="sessions-header">
+                    <h3>Upcoming Sessions</h3>
+                    <button id="createSessionBtn" class="admin-button">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div id="sessionsList">
+                    <p class="no-sessions">No upcoming sessions scheduled</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SwiftLearn. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { 
+            onAuthStateChanged, 
+            signOut,
+            updatePassword,
+            updateProfile,
+            EmailAuthProvider,
+            reauthenticateWithCredential
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { 
+            collection,
+            doc,
+            getDoc,
+            query,
+            where,
+            orderBy,
+            limit,
+            getDocs,
+            addDoc,
+            Timestamp
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { app, db, auth } from './firebase-config.js';
+
+        window.auth = auth;
+        window.db = db;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.signOut = signOut;
+        window.updatePassword = updatePassword;
+        window.updateProfile = updateProfile;
+        window.EmailAuthProvider = EmailAuthProvider;
+        window.reauthenticateWithCredential = reauthenticateWithCredential;
+        window.collection = collection;
+        window.query = query;
+        window.where = where;
+        window.orderBy = orderBy;
+        window.limit = limit;
+        window.getDocs = getDocs;
+        window.addDoc = addDoc;
+        window.Timestamp = Timestamp;
+    </script>
+    <script type="module" src="profile.js"></script>
+    <script type="module" src="admin.js"></script>
+    <script src="grid.js"></script>
+    <script>
+        // Initialize interactive grid
+        document.addEventListener('DOMContentLoaded', () => {
+            new InteractiveGrid();
+        });
+    </script>
+
+    <!-- Admin Modal -->
+    <div class="modal-backdrop" id="adminModal">
+        <div class="modal neumorphic">
+            <h3>Create Session</h3>
+            <form id="adminForm">
+                <div class="form-group">
+                    <input type="password" id="adminPassword" placeholder="Admin Password" required>
+                </div>
+                <div class="admin-content" style="display: none;">
+                    <div class="form-group">
+                        <select id="userSelect" required>
+                            <option value="">Select User</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="datetime-local" id="sessionDateTime" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="sessionType" required>
+                            <option value="group">Group Session</option>
+                            <option value="one-on-one">1-on-1 Session</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="sessionTopic" placeholder="Session Topic" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="url" id="zoomLink" placeholder="Zoom Link (Optional)">
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-button secondary" id="cancelAdminBtn">Cancel</button>
+                    <button type="submit" class="modal-button primary">Create Session</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 

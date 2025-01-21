@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftLearn - Tutoring Packages</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="pricing-page">
+    <nav class="neumorphic">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.8rem;">
+                <img src="logo.png" alt="SwiftLearn Logo" class="logo-img">
+                <span>SwiftLearn</span>
+            </a>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Our Approach</a></li>
+            <li><a href="accounts.html" class="nav-cta">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="pricing-section">
+            <h1>Choose Your Path to Success</h1>
+            <p class="section-intro">Select your preferred learning environment</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card neumorphic featured">
+                    <div class="popular-tag">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Group Sessions</h3>
+                        <div class="price">
+                            <span class="amount">£45</span>
+                            <span class="period">/week</span>
+                        </div>
+                        <p class="description">Learn alongside peers in an engaging group environment</p>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Weekly 2-Hour Group Sessions</li>
+                        <li><i class="fas fa-check"></i> Maximum 6 Students per Group</li>
+                        <li><i class="fas fa-check"></i> Comprehensive Study Materials</li>
+                        <li><i class="fas fa-check"></i> Regular Progress Reports</li>
+                        <li><i class="fas fa-check"></i> Mock Tests & Feedback</li>
+                        <li><i class="fas fa-check"></i> Online Learning Portal Access</li>
+                    </ul>
+                    <button class="enroll-button" data-package="group" data-price="4500">
+                        <i class="fas fa-arrow-right"></i>
+                        Enroll Now
+                    </button>
+                </div>
+
+                <div class="pricing-card neumorphic">
+                    <div class="pricing-header">
+                        <h3>1-on-1 Sessions</h3>
+                        <div class="price">
+                            <span class="amount">£50</span>
+                            <span class="period">/week</span>
+                        </div>
+                        <p class="description">Personalized attention tailored to your child's needs</p>
+
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Weekly 1-Hour Private Sessions</li>
+                        <li><i class="fas fa-check"></i> Customized Learning Plan</li>
+                        <li><i class="fas fa-check"></i> Premium Study Materials</li>
+                        <li><i class="fas fa-check"></i> Detailed Progress Reports</li>
+                        <li><i class="fas fa-check"></i> Flexible Scheduling</li>
+                        <li><i class="fas fa-check"></i> Priority Support & Feedback</li>
+                    </ul>
+                    <button class="enroll-button" data-package="one-on-one" data-price="5000">
+                        <i class="fas fa-arrow-right"></i>
+                        Enroll Now
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SwiftLearn. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        
+        window.initializeApp = initializeApp;
+        window.getAuth = getAuth;
+        window.onAuthStateChanged = onAuthStateChanged;
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="pricing.js"></script>
+</body>
+</html> 
