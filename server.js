@@ -2,11 +2,25 @@ require('dotenv').config();
 const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const cors = require('cors');
+const { initializeApp } = require('firebase/app');
 const { getFirestore, collection, query, where, limit, getDocs, addDoc, Timestamp } = require('firebase/firestore');
 
 const app = express();
 const YOUR_DOMAIN = 'http://localhost:5500'; // Local development URL
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyAsDbqmpt1C1CcSzgXI7FGwmpTktXCJ3KI",
+    authDomain: "learnenplay-47bff.firebaseapp.com",
+    projectId: "learnenplay-47bff",
+    storageBucket: "learnenplay-47bff.firebasestorage.app",
+    messagingSenderId: "190641439207",
+    appId: "1:190641439207:web:954c83a55ae4533981bd42"
+};
+
+// Initialize Firebase before using any Firebase services
+const firebaseApp = initializeApp(firebaseConfig);
 
 // Middleware
 app.use(express.json());
